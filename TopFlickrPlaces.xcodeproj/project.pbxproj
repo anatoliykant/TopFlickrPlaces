@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F51B05FC1CC571AE00E582F8 /* APIClient_top.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51B05FB1CC571AE00E582F8 /* APIClient_top.swift */; };
+		F51B05FE1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51B05FD1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift */; };
+		F51B06001CC5741400E582F8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51B05FF1CC5741400E582F8 /* Photo.swift */; };
 		F561A16A1CC2230500991E85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F561A1691CC2230500991E85 /* AppDelegate.swift */; };
 		F561A16C1CC2230500991E85 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F561A16B1CC2230500991E85 /* ViewController.swift */; };
 		F561A16F1CC2230500991E85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F561A16D1CC2230500991E85 /* Main.storyboard */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F51B05FB1CC571AE00E582F8 /* APIClient_top.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient_top.swift; sourceTree = "<group>"; };
+		F51B05FD1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopPhotoPlacesViewController.swift; sourceTree = "<group>"; };
+		F51B05FF1CC5741400E582F8 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		F561A1661CC2230400991E85 /* TopFlickrPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopFlickrPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F561A1691CC2230500991E85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F561A16B1CC2230500991E85 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,14 +64,17 @@
 		F561A1681CC2230500991E85 /* TopFlickrPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				F51B05FB1CC571AE00E582F8 /* APIClient_top.swift */,
+				F51B05FD1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift */,
 				F561A1691CC2230500991E85 /* AppDelegate.swift */,
-				F561A16B1CC2230500991E85 /* ViewController.swift */,
+				F561A1701CC2230500991E85 /* Assets.xcassets */,
+				F561A1751CC2230500991E85 /* Info.plist */,
+				F561A1721CC2230500991E85 /* LaunchScreen.storyboard */,
+				F561A16D1CC2230500991E85 /* Main.storyboard */,
 				F561A1811CC226B000991E85 /* RecentlyTableViewController.swift */,
 				F561A17F1CC226A200991E85 /* TopPlacesTableViewController.swift */,
-				F561A16D1CC2230500991E85 /* Main.storyboard */,
-				F561A1701CC2230500991E85 /* Assets.xcassets */,
-				F561A1721CC2230500991E85 /* LaunchScreen.storyboard */,
-				F561A1751CC2230500991E85 /* Info.plist */,
+				F561A16B1CC2230500991E85 /* ViewController.swift */,
+				F51B05FF1CC5741400E582F8 /* Photo.swift */,
 			);
 			path = TopFlickrPlaces;
 			sourceTree = "<group>";
@@ -142,8 +151,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F51B06001CC5741400E582F8 /* Photo.swift in Sources */,
 				F561A1801CC226A200991E85 /* TopPlacesTableViewController.swift in Sources */,
+				F51B05FC1CC571AE00E582F8 /* APIClient_top.swift in Sources */,
 				F561A16C1CC2230500991E85 /* ViewController.swift in Sources */,
+				F51B05FE1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift in Sources */,
 				F561A16A1CC2230500991E85 /* AppDelegate.swift in Sources */,
 				F561A1821CC226B000991E85 /* RecentlyTableViewController.swift in Sources */,
 			);
