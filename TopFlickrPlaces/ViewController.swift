@@ -12,11 +12,13 @@ import Alamofire
 class ViewController: UITabBarController {
 
     var topTable = TopPlacesTableViewController()
+    var TableOne = [String]()
     //var apiClient = APIClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        topTable.showMeTop100Places()
+        //TableOne = topTable.showMeTop100Places()
+        //topTable.showMeTop100Places()
         
     }
 

@@ -44,7 +44,10 @@ class TopPlacesTableViewController: UITableViewController {
         
         
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        self.TableArray = apiClient.findTopPlaces("22") 
+        print("TableArray.count = \(TableArray.count)")
+        return TableArray.count
     }
 
     /*
@@ -58,18 +61,17 @@ class TopPlacesTableViewController: UITableViewController {
     */
     
     
-   
     
-   
-    
-    @IBAction func showMeTop100Places() {
-        
-        //Список 100 лучших мест Flickr
-        apiClient.findTopPlaces("22")  { (success, failure) -> Void in
-            
-            self.photosTop = success
-            
-        }
-        
-    }
+//    @IBAction func showMeTop100Places() {
+//        
+//        //Список 100 лучших мест Flickr
+//        self.TableArray = apiClient.findTopPlaces("22")  { (success, failure) -> Void in
+//            
+//            self.photosTop = success
+//            
+//            
+//        }
+//        print("TableArray.count = \(TableArray.count)")
+//        
+//    }
 }
