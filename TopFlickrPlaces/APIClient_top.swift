@@ -7,25 +7,8 @@
 //
 
 import UIKit
-//import Alamofire // подключить Alamofire или SwiftyJSON
+import Alamofire // подключить Alamofire или SwiftyJSON
 
-/*
- parameters[@"tags"] = @"cats";
- parameters[@"bbox"] = @"bbox";
- parameters[@"lat"]  = @(self.mapView.centerCoordinate.latitude);
- parameters[@"lon"]  = @(self.mapView.centerCoordinate.longitude);
- parameters[@"radius"] = @"5";
- parameters[@"extras"] = @"url_l,geo,date_taken,owner_name";
- parameters[@"format"] = @"json";
- 
- 
- parameters[@"content_type"] = @1;
- parameters[@"nojsoncallback"] = @1;
- 
- parameters[@"method"] = @"flickr.photos.search";
- 
- parameters[@"api_key"] = @"2b2c9f8abc28afe8d7749aee246d951c";
- */
 
 class APIClient: NSObject {
     
@@ -35,69 +18,6 @@ class APIClient: NSObject {
     
     typealias PhotosCompletionTopPlaces = (success:[PhotoTopPlaces]?,failure:NSError?) -> Void
     
-//    func findAllPhotosOfUser(id:String, completion:PhotosCompletion){
-//        var params = [String:AnyObject]()
-//        
-//        params["method"]  = "flickr.photos.search"
-//        params["user_id"] = id
-//        params = authorise(params)
-//        params["extras"] = "url_l,geo,date_taken,owner_name,url_s,description"
-//        
-//        
-//        Alamofire.request(.GET,
-//            APIClient.apiURL,
-//            parameters: params,
-//            encoding: .URL,
-//            headers: nil)
-//            .responseJSON { response -> Void in
-//                
-//                if response.result.error != nil {
-//                    completion(success:nil,failure:response.result.error)
-//                    return
-//                }
-//                
-//                let results = self.parsePhotosFrom(response.result.value as! [String:AnyObject])
-//                completion(success:results,failure:nil)
-//        }
-//    }
-    
-//    func find(searchName:String,
-//              longitude:Double,
-//              latitude:Double,
-//              radius:Double,
-//              completion:PhotosCompletion
-//        ){
-//        var params = [String:AnyObject]()
-//        
-//        params["tags"] = searchName
-//        params["bbox"] = "bbox"
-//        params["lat"]  = latitude
-//        params["lon"]  = longitude
-//        params["radius"] = radius
-//        params["extras"] = "url_l,geo,date_taken,owner_name,url_s,description"
-//        
-//        params["method"] = "flickr.photos.search"
-//        params = authorise(params)
-//        
-//        Alamofire.request(.GET,
-//            APIClient.apiURL,
-//            parameters: params,
-//            encoding: .URL,
-//            headers: nil)
-//            .responseJSON { response -> Void in
-//                
-//                if response.result.error != nil {
-//                    completion(success: nil, failure: response.result.error)
-//                    return
-//                }
-//                
-//                
-//                let results = self.parsePhotosFrom(response.result.value as! [String:AnyObject])
-//                print("JSON find cats: \(results)")
-//                completion(success: results, failure: nil)
-//        }
-//    }
-//    
     
     
     func findTopPlaces(place_type_id:String, completion:PhotosCompletionTopPlaces){
