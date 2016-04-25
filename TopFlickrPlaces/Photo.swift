@@ -12,7 +12,7 @@ class PhotoTopPlaces: NSObject  {
     var name:String?
     //var coordinate:CLLocationCoordinate2D
     var photoURL:String = ""
-    var userID:String = ""
+    var placeID:String = ""
     var title: String? {
         return name
     }
@@ -35,8 +35,8 @@ class PhotoTopPlaces: NSObject  {
             photoURL = url
         }
         
-        if let id  = info["owner"] as? String {
-            userID = id
+        if let id  = info["place_id"] as? String {
+            placeID = id
         }
         super.init()
     }
