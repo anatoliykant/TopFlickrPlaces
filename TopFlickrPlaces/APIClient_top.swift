@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire // подключить Alamofire или SwiftyJSON
-import SwiftyJSON
 
 
 class APIClient: NSObject {
@@ -20,21 +19,8 @@ class APIClient: NSObject {
     typealias PhotosCompletionTopPlaces = (success:[PhotoTopPlaces]?,failure:NSError?) -> Void
     
     
-    func jsonFromSwiftyJSON (dataFromNetworking: NSData) {
-        
-        let json = JSON (data: dataFromNetworking)
-            //"https://api.flickr.com/services/rest/" as! NSData)
-        //let json = JSON(data: APIClient.apiURL as! NSData)
-        if let userName = json["places"]["place"][0]["woe_name"].string {
-            //Now you got your value
-            print("First user name: \(userName)")
-        }
-        
-    }
     
-    
-    //func findTopPlaces(place_type_id:String, completion:PhotosCompletionTopPlaces) -> [String] {
-    func findTopPlaces(place_type_id:String) -> [String] {
+    func findTopPlaces(place_type_id:String, completion:PhotosCompletionTopPlaces){
         var params = [String:AnyObject]()
         
         
@@ -43,7 +29,6 @@ class APIClient: NSObject {
         params["method"]  = "flickr.places.getTopPlacesList"
         params = authorise(params)
         
-        var topPlaces = [String]()
         
         
         Alamofire.request(.GET,
@@ -53,96 +38,16 @@ class APIClient: NSObject {
             headers: nil)
             .responseJSON { response -> Void in
                 
-//                if response.result.error != nil {
-//                    completion(success:nil,failure:response.result.error)
-//                    
-//                    return
-//                }
-                
-                //let results = self.parsePhotosTopPlaces(response.result.value as! [String:AnyObject])
-                
-                if let tempValue = response.result.value
-                {
-                let json = JSON(tempValue)
+                if response.result.error != nil {
+                    completion(success:nil,failure:response.result.error)
                     
-                    
-                let onePlaceID = json["places"]["place"][1]["woe_name"].string!
-                print("JSON: \(onePlaceID)")
-                    
-                    if let topArray = json["places"]["place"].array {
-                        
-                        
-                        for placeDict in 0..<topArray.count {
-                            let topPlace: String! = json["places"]["place"][placeDict]["woe_name"].string!
-                            //print("Another topPlace: \(topPlace)")
-                            
-                            topPlaces.append(topPlace)
-                        }
-                        
-                        print("topPlaces: \(topPlaces)")
-                   }
-                    
-                    
-//                    //var parsedPhotos = [PhotoTopPlaces]()
-//                    
-//                    //let json = JSON(data: jokesData)//заносим данные с сайта .../sources в константу json
-//                    
-//                    //1 присваиваем константе jokeArray массив данных с сайта .../sources
-//                    if let jokeArray = json[].array {
-//                        //2 создаем изменяемый массив для хранения объектов, которые будут созданы
-//                        //var jokes = [JokesModel]()
-//                        var jokesSiteName = [String]()
-//                        
-//                        //3 перебираем все элементы и создаем AppModel из данных JSON.
-//                        for appDict in jokeArray {
-//                            for jokeDict in 0..<appDict.count {
-//                                let jokeSiteName: String? = appDict[jokeDict]["name"].string
-//                                //let appURL: String? = appDict[jokeDict]["url"].string
-//                                
-//                                jokesSiteName.append(jokeSiteName!)
-//                                //let joke = JokesModel(name: appName, jokeURL: appURL)
-//                                //jokes.append(joke)
-//                            }
-//                            
-//                        }
-//                        
-//                        jokesSiteName.append("Random")//добавляем в название для сайта http://www.umori.li/api/random?num=10
-//                        
-//                        
-//                        //Занесение списка сайтов в массив TableArray и перезагрузка списка в левом меню
-//                        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-//                            
-//                            //print("jokesSiteName: \(jokesSiteName)")
-//                            self.TableArray = jokesSiteName
-//                            self.tableViewLeft.reloadData()
-//                        })
-//                    }
-                    
-                    //for placeID
-                    
-                    
-                    //        let parsedPhotos =
-                    //let placeTop = place[].array
-                    
-                    //        var jokesTopPlacesID = [String]()
-                    //
-                    //        for topPlacesDict in place {
-                    //            for idDict in 0..<topPlacesDict.count {
-                    //                let jokesTopPlacesID: String? = topPlacesDict[idDict]["place_id"].string
-                    //            }
-                    //        }
-                    
+                    return
                 }
                 
-                //let countPlaces = results!.count
-                //print("JSON top Places: \(results!)")
-                //print("JSON top Places count: \(countPlaces)")
-                //completion(success:results,failure:nil)
-                
-                //return topPlaces
+                let results = self.parsePhotosTopPlaces(response.result.value as! [String:AnyObject])
+                print("JSON top Places: \(results)")
+                completion(success:results,failure:nil)
         }
-        print("topPlaces End: \(topPlaces)")
-        return topPlaces
     }
     
     
@@ -172,15 +77,13 @@ class APIClient: NSObject {
         //places
         //place
         guard let places = info["places"] as? [String : AnyObject],
-                let place = places["place"] as? [ [String : AnyObject] ]
-                //let woe_name = place[""] as? String
+            let place = places["place"] as? [ [String : AnyObject] ]
             else {
                 return [PhotoTopPlaces]()
         }
         
         var parsedPhotos = [PhotoTopPlaces]()
         
-       
         for info in place {
             parsedPhotos.append(PhotoTopPlaces(info: info))
         }
