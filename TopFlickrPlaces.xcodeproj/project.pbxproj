@@ -96,18 +96,26 @@
 			isa = PBXGroup;
 			children = (
 				F51B05FB1CC571AE00E582F8 /* APIClient_top.swift */,
-				F51B05FF1CC5741400E582F8 /* Photo.swift */,
-				F561A17F1CC226A200991E85 /* TopPlacesTableViewController.swift */,
-				F51B05FD1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift */,
 				F561A1691CC2230500991E85 /* AppDelegate.swift */,
+				F51B05FF1CC5741400E582F8 /* Photo.swift */,
+				F561A1811CC226B000991E85 /* RecentlyTableViewController.swift */,
+				F51B05FD1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift */,
+				F561A17F1CC226A200991E85 /* TopPlacesTableViewController.swift */,
+				F561A16B1CC2230500991E85 /* ViewController.swift */,
+				F5F220791CD0E2F400AD8A7F /* storyboard */,
 				F561A1701CC2230500991E85 /* Assets.xcassets */,
 				F561A1751CC2230500991E85 /* Info.plist */,
-				F561A1721CC2230500991E85 /* LaunchScreen.storyboard */,
-				F561A16D1CC2230500991E85 /* Main.storyboard */,
-				F561A1811CC226B000991E85 /* RecentlyTableViewController.swift */,
-				F561A16B1CC2230500991E85 /* ViewController.swift */,
 			);
 			path = TopFlickrPlaces;
+			sourceTree = "<group>";
+		};
+		F5F220791CD0E2F400AD8A7F /* storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				F561A1721CC2230500991E85 /* LaunchScreen.storyboard */,
+				F561A16D1CC2230500991E85 /* Main.storyboard */,
+			);
+			name = storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

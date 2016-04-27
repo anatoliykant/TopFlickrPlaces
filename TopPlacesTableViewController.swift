@@ -7,71 +7,180 @@
 //
 
 import UIKit
-//import SwiftyJSON
+import Alamofire
+import SwiftyJSON
 
 class TopPlacesTableViewController: UITableViewController {
-    
+        
     @IBOutlet var tableViewListTopPlaces: UITableView!
     
     var TableArray = [String]()
+    var TableArrayContent = [String]()
 
-    var apiClient = APIClient()
     var photosTop:[PhotoTopPlaces]?
+    
+    static let apiURL = "https://api.flickr.com/services/rest/"
+    
+    //var topTable = TopPlacesTableViewController()
+    
+    //typealias PhotosCompletion = (success:[Photo]?,failure:NSError?) -> Void
+    
+    typealias PhotosCompletionTopPlaces = (success:[PhotoTopPlaces]?,failure:NSError?) -> Void
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+        findTopPlaces()
+        
+    }
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    func setupTableView() {
+        tableViewListTopPlaces.delegate   = self
+        tableViewListTopPlaces.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
-        // #warning Incomplete implementation, return the number of rows
-        
-        self.TableArray = apiClient.findTopPlaces("22") 
-        print("TableArray.count = \(TableArray.count)")
-        return TableArray.count
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-    
-    
-    
-//    @IBAction func showMeTop100Places() {
+    //функция распарсивания 100 лучших мест с помощью SwiftyJSON (может дописать вместо Alamofire?)
+//    func jsonFromSwiftyJSON (dataFromNetworking: NSData) {
 //        
-//        //Список 100 лучших мест Flickr
-//        self.TableArray = apiClient.findTopPlaces("22")  { (success, failure) -> Void in
-//            
-//            self.photosTop = success
-//            
-//            
+//        let json = JSON (data: dataFromNetworking)
+//        //"https://api.flickr.com/services/rest/" as! NSData)
+//        //let json = JSON(data: APIClient.apiURL as! NSData)
+//        if let userName = json["places"]["place"][0]["woe_name"].string {
+//            //Now you got your value
+//            print("First user name: \(userName)")
 //        }
-//        print("TableArray.count = \(TableArray.count)")
 //        
 //    }
-}
+    
+    //распарсим списко 100 лучших мест Flickr
+    func parsePhotosTopPlaces(info:[String:AnyObject])->[PhotoTopPlaces]? {
+        
+        guard let places = info["places"] as? [String : AnyObject],
+            let place = places["place"] as? [ [String : AnyObject] ]
+            //let woe_name = place[""] as? String
+            else {
+                return [PhotoTopPlaces]()
+        }
+        
+        var parsedPhotos = [PhotoTopPlaces]()
+        
+        
+        for info in place {
+            parsedPhotos.append(PhotoTopPlaces(info: info))
+        }
+        
+        return parsedPhotos
+    }
+    
+    //прохождение авторизации
+    func authorise(parameters:[String:AnyObject])->[String:AnyObject] {
+        
+        var authorisedParams = parameters
+        
+        authorisedParams["api_key"] = "2b2c9f8abc28afe8d7749aee246d951c"
+        
+        authorisedParams["format"]  = "json"
+        authorisedParams["content_type"]   = 1
+        authorisedParams["nojsoncallback"] = 1
+        
+        return authorisedParams
+    }
+    
+    
+    func findTopPlaces() {
+        
+        var params = [String:AnyObject]()
+        
+        
+        //params["user_id"] = id
+        params["place_type_id"] = "22"
+        params["method"]  = "flickr.places.getTopPlacesList"
+        params = authorise(params)
+        
+        Alamofire.request(.GET,
+            TopPlacesTableViewController.apiURL,
+            parameters: params,
+            encoding: .URL,
+            headers: nil)
+            .responseJSON { response -> Void in
+                
+                
+                if let tempValue = response.result.value
+                {
+                    let json = JSON(tempValue)
+                    
+                    var topPlaces = [String]()
+                    var topPlacesContent = [String]()
+                    let onePlaceContent = json["places"]["place"][1]["_content"].string!
+                    print("JSON: \(onePlaceContent)")
+                    
+                    if let topArray = json["places"]["place"].array {
+                        
+                        
+                        for placeDict in 0..<topArray.count {
+                            let topPlace: String! = json["places"]["place"][placeDict]["woe_name"].string!
+                            let topPlaceContent: String! = json["places"]["place"][placeDict]["_content"].string!
+                            //print("Another topPlace: \(topPlace)")
+                            
+                            topPlaces.append(topPlace!)
+                            topPlacesContent.append(topPlaceContent!)
+                        }
+                        
+                        //print("topPlaces: \(topPlaces)")
+                        //Занесение списка сайтов в массив TableArray и перезагрузка списка c топ 100 фото
+                        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                            
+                            //print("jokesSiteName: \(jokesSiteName)")
+                            self.TableArray = topPlaces
+                            self.TableArrayContent = topPlacesContent
+                            //print(self.TableArrayContent.count)
+                            //print(self.TableArrayContent)
+                            self.tableViewListTopPlaces.reloadData()
+                        })
+                    }
+                }
+        }
+    }
+    
+    // вовзвращает кол-во строк в TableView = кол-во элементов массива TableArray
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return TableArray.count
+    }
+    
+    // заполняет ячейки элементами из массива TableArray
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell1 = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        
+        cell1.textLabel?.text = TableArray[indexPath.row]
+        //var detailLabel = "\(TableArray[indexPath.row]) \(indexPath.row)"
+        cell1.detailTextLabel?.text = TableArrayContent[indexPath.row]
+        
+        return cell1
+    }
+    
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        //взять ячейку с нажатым индексом
+//        let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
+//        
+//        //вычленим у нее текст
+//        let objectToSend = selectedCell?.textLabel?.text
+//        
+//        //пошлем уведомление с названием и текстом
+//        //NSNotificationCenter.defaultCenter().postNotificationName("LeftMenuPressed", object: objectToSend)
+//    }
+
+    
+    
+    }
+
+
+
+
