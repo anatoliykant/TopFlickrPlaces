@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+//import MapKit
 
 class TopPlacesTableViewController: UITableViewController {
         
@@ -118,8 +119,8 @@ class TopPlacesTableViewController: UITableViewController {
                     
                     var topPlaces = [String]()
                     var topPlacesContent = [String]()
-                    let onePlaceContent = json["places"]["place"][1]["_content"].string!
-                    print("JSON: \(onePlaceContent)")
+                    //let onePlaceContent = json["places"]["place"][1]["_content"].string!
+                    //print("JSON: \(onePlaceContent)")
                     
                     if let topArray = json["places"]["place"].array {
                         
@@ -127,7 +128,7 @@ class TopPlacesTableViewController: UITableViewController {
                         for placeDict in 0..<topArray.count {
                             let topPlace: String! = json["places"]["place"][placeDict]["woe_name"].string!
                             let topPlaceContent: String! = json["places"]["place"][placeDict]["_content"].string!
-                            //print("Another topPlace: \(topPlace)")
+                            print("Another topPlace: \(topPlace)")
                             
                             topPlaces.append(topPlace!)
                             topPlacesContent.append(topPlaceContent!)
@@ -161,21 +162,33 @@ class TopPlacesTableViewController: UITableViewController {
         cell1.textLabel?.text = TableArray[indexPath.row]
         //var detailLabel = "\(TableArray[indexPath.row]) \(indexPath.row)"
         cell1.detailTextLabel?.text = TableArrayContent[indexPath.row]
-        
         return cell1
     }
     
-//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        
-//        //взять ячейку с нажатым индексом
-//        let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
-//        
-//        //вычленим у нее текст
-//        let objectToSend = selectedCell?.textLabel?.text
-//        
-//        //пошлем уведомление с названием и текстом
-//        //NSNotificationCenter.defaultCenter().postNotificationName("LeftMenuPressed", object: objectToSend)
-//    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //взять ячейку с нажатым индексом
+        let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        //вычленим у нее текст
+        let objectToSend = selectedCell!.textLabel!.text!
+        
+        //Всплывающее уведомление выбора места - временный момент (проверка)
+        let alert = UIAlertController(title: "Your choise", message: "Place: \(objectToSend)", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        
+            alert.addAction(action)
+            self.presentViewController(alert, animated: true, completion: nil)
+        
+        
+        
+//        func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//            performSegueWithIdentifier("Show Place Detail", sender: view.annotation)
+//        }
+        
+        //пошлем уведомление с названием и текстом
+        //NSNotificationCenter.defaultCenter().postNotificationName("LeftMenuPressed", object: objectToSend)
+    }
 
     
     
