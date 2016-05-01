@@ -5,3 +5,4 @@ use_frameworks!
 
 pod 'SwiftyJSON', '~> 2.3'
 pod 'Alamofire', '~> 3.3'
+pod 'SDWebImage', '~> 3.7'

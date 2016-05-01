@@ -11,6 +11,10 @@ import Alamofire
 import SwiftyJSON
 //import MapKit
 
+//protocol SecondViewControllerDelegate {
+//    func fillTheLabelWith(info: String)
+//}
+
 class TopPlacesTableViewController: UITableViewController {
         
     @IBOutlet var tableViewListTopPlaces: UITableView!
@@ -168,17 +172,17 @@ class TopPlacesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //взять ячейку с нажатым индексом
-        let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
+        //let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
         
         //вычленим у нее текст
-        let objectToSend = selectedCell!.textLabel!.text!
+        //let objectToSend = selectedCell!.textLabel!.text!
         
         //Всплывающее уведомление выбора места - временный момент (проверка)
-        let alert = UIAlertController(title: "Your choise", message: "Place: \(objectToSend)", preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        //let alert = UIAlertController(title: "Your choise", message: "Place: \(objectToSend)", preferredStyle: .Alert)
+        //let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
         
-            alert.addAction(action)
-            self.presentViewController(alert, animated: true, completion: nil)
+            //alert.addAction(action)
+            //self.presentViewController(alert, animated: true, completion: nil)
         
         
         

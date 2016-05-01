@@ -13,7 +13,106 @@
 //    
 //}
 
+import UIKit
+import Alamofire
 
+/*
+ parameters[@"tags"] = @"cats";
+ parameters[@"bbox"] = @"bbox";
+ parameters[@"lat"]  = @(self.mapView.centerCoordinate.latitude);
+ parameters[@"lon"]  = @(self.mapView.centerCoordinate.longitude);
+ parameters[@"radius"] = @"5";
+ parameters[@"extras"] = @"url_l,geo,date_taken,owner_name";
+ parameters[@"format"] = @"json";
+ 
+ 
+ parameters[@"content_type"] = @1;
+ parameters[@"nojsoncallback"] = @1;
+ 
+ parameters[@"method"] = @"flickr.photos.search";
+ 
+ parameters[@"api_key"] = @"2b2c9f8abc28afe8d7749aee246d951c";
+ */
+
+class APIClient: NSObject {
+    
+    static let apiURL = "https://api.flickr.com/services/rest/"
+    
+    private var topPlaces = TopPlacesTableViewController()
+    
+    typealias PhotosCompletion = (success:[Photo]?, failure:NSError?) -> Void
+    
+    func findAllPhotosOfTopPlace(id:String, completion: PhotosCompletion) {
+        var params = [String:AnyObject]()
+        
+        params["method"] = "flickr.photos.search"
+        params["place_id"] = id
+        params = topPlaces.authorise(params)
+        params["extras"] = "url_l, url_s, geo, date_taken, owner_name, description"
+        
+        Alamofire.request(.GET,
+            APIClient.apiURL,
+            parameters: params,
+            encoding: .URL,
+            headers: nil)
+            .responseJSON { response -> Void in
+                
+                if response.result.error != nil {
+                    completion(success: nil, failure: response.result.error)
+                    return
+                }
+                
+                let results = self.parsePhotosFrom(response.result.value as! [String:AnyObject])
+                completion(success: results, failure: nil)
+        }
+}
+    
+//    func findAllPhotosOfUser(id:String, completion: PhotosCompletion) {
+//        var params = [String:AnyObject]()
+//        
+//        params["method"] = "flickr.photos.search"
+//        params["user_id"] = id
+//        params = topPlaces.authorise(params)
+//        params["extras"] = "url_l, url_s, geo, date_taken, owner_name, description"
+//        
+//        Alamofire.request(.GET,
+//            APIClient.apiURL,
+//            parameters: params,
+//            encoding: .URL,
+//            headers: nil)
+//            .responseJSON { response -> Void in
+//                
+//                if response.result.error != nil {
+//                    completion(success: nil, failure: response.result.error)
+//                    return
+//                }
+//                
+//                let results = self.parsePhotosFrom(response.result.value as! [String:AnyObject])
+//                completion(success: results, failure: nil)
+//        }
+//    }
+
+    
+    func parsePhotosFrom(info:[String:AnyObject])->[Photo]? {
+        
+        //photos
+        //photo
+        guard let photos = info  ["photos"] as? [String : AnyObject],
+            let photo = photos["photo"] as? [ [String : AnyObject] ]
+            else {
+                return [Photo]()
+        }
+        
+        var parsedPhotos = [Photo]()
+        
+        for info in photo {
+            parsedPhotos.append(Photo(info: info))
+        }
+        
+        return parsedPhotos
+    }
+
+}
 //import UIKit
 //import Alamofire // подключить Alamofire или SwiftyJSON
 //import SwiftyJSON
@@ -156,25 +255,7 @@
 //    
 //    
 //    
-////    func parsePhotosFrom(info:[String:AnyObject])->[Photo]? {
-////        
-////        //photos
-////        //photo
-////        guard let photos = info  ["photos"] as? [String : AnyObject],
-////            let photo = photos["photo"] as? [ [String : AnyObject] ]
-////            else {
-////                return [Photo]()
-////        }
-////        
-////        var parsedPhotos = [Photo]()
-////        
-////        for info in photo {
-////            parsedPhotos.append(Photo(info: info))
-////        }
-////        
-////        return parsedPhotos
-////    }
-//    
+//
 //    //распарсим фотки 100 лучших мест
 //    func parsePhotosTopPlaces(info:[String:AnyObject])->[PhotoTopPlaces]? {
 //        
