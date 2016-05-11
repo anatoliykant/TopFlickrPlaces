@@ -8,43 +8,8 @@
 
 import UIKit
 
-class PhotoTopPlaces: NSObject  {
+class Photo: NSObject  {
     var name:String?
-    //var coordinate:CLLocationCoordinate2D
-    var photoURL:String = ""
-    var placeID:String = ""
-    var title: String? {
-        return name
-    }
-    
-    init(info:[String:AnyObject]){
-        if let parsedName = info["woe_name"] as? String {
-            name = parsedName
-        }
-        
-//        guard let long = info["longitude"] as? String,
-//            let lat  = info["latitude"] as? String else {
-//                coordinate = CLLocationCoordinate2D(latitude: -500, longitude: -500)
-//                super.init()
-//                return
-//        }
-        
-        //coordinate = CLLocationCoordinate2D(latitude: Double(lat)!, longitude: Double(long)!)
-        
-        if let url   = info["place_url"] as? String {
-            photoURL = url
-        }
-        
-        if let id  = info["place_id"] as? String {
-            placeID = id
-        }
-        super.init()
-    }
-}
-
-class Photo: NSObject {
-    var name:String?
-    
     var photoURL = ""
     var iconURL = ""
     var iconWidth = 0
@@ -64,8 +29,6 @@ class Photo: NSObject {
         if let ownerIDValue = info["owner"] as? String {
             ownerID = ownerIDValue
         }
-               
-        
         
         if let url = info["url_l"] as? String {
             photoURL = url
@@ -83,14 +46,44 @@ class Photo: NSObject {
             let descriptionContent = description["_content"] {
             photoDescription = descriptionContent
         }
+        
         if photoDescription.isEmpty {
-            print("not found description")
+            //print("not found description")
         }
         
         if let iconWidthValue = info["width_s"] as? Int {
             iconWidth = iconWidthValue
         }
         
+        super.init()
+    }
+}
+
+
+class PhotoTopPlaces: NSObject  {
+    
+    var name:String?
+    var photoURL:String = ""
+    var placeID:String = ""
+    var title: String? {
+        return name
+    }
+    
+    init(info:[String:AnyObject]){
+        if let parsedName = info["woe_name"] as? String {
+            name = parsedName
+            print("name PhotoTopPlaces: \(name)")
+        }
+        
+        if let url   = info["place_url"] as? String {
+            photoURL = url
+            print("photoURL PhotoTopPlaces: \(photoURL)")
+        }
+        
+        if let id  = info["place_id"] as? String {
+            placeID = id
+            print("placeID PhotoTopPlaces: \(placeID)")
+        }
         super.init()
     }
 }

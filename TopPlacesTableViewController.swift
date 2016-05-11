@@ -9,11 +9,6 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
-//import MapKit
-
-//protocol SecondViewControllerDelegate {
-//    func fillTheLabelWith(info: String)
-//}
 
 class TopPlacesTableViewController: UITableViewController {
         
@@ -25,10 +20,6 @@ class TopPlacesTableViewController: UITableViewController {
     var photosTop:[PhotoTopPlaces]?
     
     static let apiURL = "https://api.flickr.com/services/rest/"
-    
-    //var topTable = TopPlacesTableViewController()
-    
-    //typealias PhotosCompletion = (success:[Photo]?,failure:NSError?) -> Void
     
     typealias PhotosCompletionTopPlaces = (success:[PhotoTopPlaces]?,failure:NSError?) -> Void
     
@@ -51,20 +42,8 @@ class TopPlacesTableViewController: UITableViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-    //функция распарсивания 100 лучших мест с помощью SwiftyJSON (может дописать вместо Alamofire?)
-//    func jsonFromSwiftyJSON (dataFromNetworking: NSData) {
-//        
-//        let json = JSON (data: dataFromNetworking)
-//        //"https://api.flickr.com/services/rest/" as! NSData)
-//        //let json = JSON(data: APIClient.apiURL as! NSData)
-//        if let userName = json["places"]["place"][0]["woe_name"].string {
-//            //Now you got your value
-//            print("First user name: \(userName)")
-//        }
-//        
-//    }
     
-    //распарсим списко 100 лучших мест Flickr
+    //распарсим список 100 лучших мест Flickr
     func parsePhotosTopPlaces(info:[String:AnyObject])->[PhotoTopPlaces]? {
         
         guard let places = info["places"] as? [String : AnyObject],
@@ -90,7 +69,6 @@ class TopPlacesTableViewController: UITableViewController {
         var authorisedParams = parameters
         
         authorisedParams["api_key"] = "2b2c9f8abc28afe8d7749aee246d951c"
-        
         authorisedParams["format"]  = "json"
         authorisedParams["content_type"]   = 1
         authorisedParams["nojsoncallback"] = 1
@@ -105,7 +83,7 @@ class TopPlacesTableViewController: UITableViewController {
         
         
         //params["user_id"] = id
-        params["place_type_id"] = "22"
+        params["place_type_id"] = "8"
         params["method"]  = "flickr.places.getTopPlacesList"
         params = authorise(params)
         
@@ -132,7 +110,7 @@ class TopPlacesTableViewController: UITableViewController {
                         for placeDict in 0..<topArray.count {
                             let topPlace: String! = json["places"]["place"][placeDict]["woe_name"].string!
                             let topPlaceContent: String! = json["places"]["place"][placeDict]["_content"].string!
-                            print("Another topPlace: \(topPlace)")
+                            //print("Another topPlace: \(topPlace)")
                             
                             topPlaces.append(topPlace!)
                             topPlacesContent.append(topPlaceContent!)
@@ -142,9 +120,9 @@ class TopPlacesTableViewController: UITableViewController {
                         //Занесение списка сайтов в массив TableArray и перезагрузка списка c топ 100 фото
                         NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                             
-                            //print("jokesSiteName: \(jokesSiteName)")
-                            self.TableArray = topPlaces
-                            self.TableArrayContent = topPlacesContent
+                            //print("jokesSit eName: \(jokesSiteName)")
+                            self.TableArray = topPlaces               //.sort()
+                            self.TableArrayContent = topPlacesContent //.sort()
                             //print(self.TableArrayContent.count)
                             //print(self.TableArrayContent)
                             self.tableViewListTopPlaces.reloadData()
@@ -168,35 +146,7 @@ class TopPlacesTableViewController: UITableViewController {
         cell1.detailTextLabel?.text = TableArrayContent[indexPath.row]
         return cell1
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        //взять ячейку с нажатым индексом
-        //let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
-        
-        //вычленим у нее текст
-        //let objectToSend = selectedCell!.textLabel!.text!
-        
-        //Всплывающее уведомление выбора места - временный момент (проверка)
-        //let alert = UIAlertController(title: "Your choise", message: "Place: \(objectToSend)", preferredStyle: .Alert)
-        //let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        
-            //alert.addAction(action)
-            //self.presentViewController(alert, animated: true, completion: nil)
-        
-        
-        
-//        func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//            performSegueWithIdentifier("Show Place Detail", sender: view.annotation)
-//        }
-        
-        //пошлем уведомление с названием и текстом
-        //NSNotificationCenter.defaultCenter().postNotificationName("LeftMenuPressed", object: objectToSend)
-    }
-
-    
-    
-    }
+}
 
 
 

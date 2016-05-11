@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A2378915AAF0471B4B12C579 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2716811E6B15EEFA0F96DEC /* Pods.framework */; };
+		E6786C6E1CDFD95A00691E8C /* FullImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6786C6D1CDFD95A00691E8C /* FullImageCollectionViewCell.swift */; };
 		E6E6BD551CD6AF3800482616 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E6BD541CD6AF3800482616 /* GalleryViewController.swift */; };
 		E6E6BD571CD6B15200482616 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E6BD561CD6B15200482616 /* PhotoCollectionViewCell.swift */; };
 		E6E6BD591CD6BB3A00482616 /* FullPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E6BD581CD6BB3A00482616 /* FullPhotoViewController.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		E2716811E6B15EEFA0F96DEC /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6786C6D1CDFD95A00691E8C /* FullImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		E6E6BD541CD6AF3800482616 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GalleryViewController.swift; path = ../GalleryViewController.swift; sourceTree = "<group>"; };
 		E6E6BD561CD6B15200482616 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		E6E6BD581CD6BB3A00482616 /* FullPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPhotoViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				E6E6BD581CD6BB3A00482616 /* FullPhotoViewController.swift */,
 				E6E6BD541CD6AF3800482616 /* GalleryViewController.swift */,
 				E6E6BD561CD6B15200482616 /* PhotoCollectionViewCell.swift */,
+				E6786C6D1CDFD95A00691E8C /* FullImageCollectionViewCell.swift */,
 				F51B05FF1CC5741400E582F8 /* Photo.swift */,
 				F561A1811CC226B000991E85 /* RecentlyTableViewController.swift */,
 				F51B05FD1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift */,
@@ -256,6 +259,7 @@
 				E6E6BD591CD6BB3A00482616 /* FullPhotoViewController.swift in Sources */,
 				F51B05FC1CC571AE00E582F8 /* APIClient_top.swift in Sources */,
 				F561A16C1CC2230500991E85 /* ViewController.swift in Sources */,
+				E6786C6E1CDFD95A00691E8C /* FullImageCollectionViewCell.swift in Sources */,
 				F51B05FE1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift in Sources */,
 				E6E6BD571CD6B15200482616 /* PhotoCollectionViewCell.swift in Sources */,
 				E6E6BD551CD6AF3800482616 /* GalleryViewController.swift in Sources */,

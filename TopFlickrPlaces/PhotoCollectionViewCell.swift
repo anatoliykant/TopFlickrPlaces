@@ -14,3 +14,5 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var textLabel: UILabel!
     
 }
+
+
