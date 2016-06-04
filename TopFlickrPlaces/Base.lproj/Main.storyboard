@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XQH-JK-ctd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XQH-JK-ctd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -39,9 +39,6 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <accessibility key="accessibilityConfiguration" label="123"/>
-                                <connections>
-                                    <segue destination="AKv-Ek-Y2h" kind="show" id="xxK-Di-egw"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -54,6 +51,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableViewListTopPlaces" destination="l4X-FX-FmA" id="uiQ-jv-B87"/>
+                        <segue destination="AKv-Ek-Y2h" kind="show" id="Fjz-cq-htl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qy1-Th-RMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -63,7 +61,7 @@
         <!--Gallery View Controller-->
         <scene sceneID="6k6-XR-ExZ">
             <objects>
-                <viewController id="AKv-Ek-Y2h" userLabel="Gallery View Controller" customClass="GalleryViewController" customModule="TopFlickrPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GalleryVC" id="AKv-Ek-Y2h" userLabel="Gallery View Controller" customClass="GalleryViewController" customModule="TopFlickrPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="49c-se-2ch"/>
                         <viewControllerLayoutGuide type="bottom" id="BVH-zQ-Tm5"/>
@@ -111,7 +109,6 @@
                                         <connections>
                                             <outlet property="imageView" destination="xac-nj-KOX" id="E3x-yF-J9K"/>
                                             <outlet property="textLabel" destination="hbx-I8-zWV" id="Dq9-wi-UGU"/>
-                                            <segue destination="5T4-50-G7Q" kind="show" identifier="FullPhotoSegue" id="nWh-Pk-J03"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -128,6 +125,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="collectionView" destination="Y8o-Ny-V0e" id="IUl-vi-F2k"/>
+                        <segue destination="5T4-50-G7Q" kind="show" id="IJO-wI-9p0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C0h-rL-NVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -137,7 +135,7 @@
         <!--Full Photo View Controller-->
         <scene sceneID="VRc-ae-DYU">
             <objects>
-                <viewController id="5T4-50-G7Q" customClass="FullPhotoViewController" customModule="TopFlickrPlaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FullStoryVC" id="5T4-50-G7Q" customClass="FullPhotoViewController" customModule="TopFlickrPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iQb-zV-uTP"/>
                         <viewControllerLayoutGuide type="bottom" id="C85-cO-yvg"/>
@@ -146,33 +144,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2G-4w-DKI">
-                                <rect key="frame" x="-4" y="57" width="383" height="561"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kw9-Iy-hIr">
-                                        <rect key="frame" x="0.0" y="0.0" width="379" height="554"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="Kw9-Iy-hIr" firstAttribute="top" secondItem="k2G-4w-DKI" secondAttribute="top" id="KW6-bf-ek0"/>
-                                    <constraint firstAttribute="trailing" secondItem="Kw9-Iy-hIr" secondAttribute="trailing" constant="4" id="UM5-iE-jQo"/>
-                                    <constraint firstAttribute="bottom" secondItem="Kw9-Iy-hIr" secondAttribute="bottom" constant="7" id="hKz-ts-JyN"/>
-                                    <constraint firstItem="Kw9-Iy-hIr" firstAttribute="leading" secondItem="k2G-4w-DKI" secondAttribute="leading" id="yFs-gf-h5Z"/>
-                                </constraints>
-                            </scrollView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kw9-Iy-hIr">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wkn-nK-Hva" userLabel="PhotoURLLabel">
+                                <rect key="frame" x="20" y="580" width="328" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9y-Yq-QWg">
+                                <rect key="frame" x="20" y="475" width="337" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="k2G-4w-DKI" firstAttribute="leading" secondItem="LfT-AF-1MI" secondAttribute="leadingMargin" constant="-20" id="No7-qW-DfR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="k2G-4w-DKI" secondAttribute="trailing" constant="-20" id="kEf-2K-V5Y"/>
-                            <constraint firstItem="C85-cO-yvg" firstAttribute="top" secondItem="k2G-4w-DKI" secondAttribute="bottom" id="nef-YC-E7Y"/>
-                            <constraint firstItem="k2G-4w-DKI" firstAttribute="top" secondItem="iQb-zV-uTP" secondAttribute="bottom" constant="-7" id="q9W-GP-Yu1"/>
+                            <constraint firstItem="Kw9-Iy-hIr" firstAttribute="bottom" secondItem="C85-cO-yvg" secondAttribute="top" id="A3t-8x-YL5"/>
+                            <constraint firstItem="Wkn-nK-Hva" firstAttribute="top" secondItem="I9y-Yq-QWg" secondAttribute="bottom" constant="84" id="CL0-ra-VX8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Wkn-nK-Hva" secondAttribute="trailing" constant="11" id="DHv-A0-ueV"/>
+                            <constraint firstItem="I9y-Yq-QWg" firstAttribute="leading" secondItem="Wkn-nK-Hva" secondAttribute="leading" id="F4H-Ou-NQk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="I9y-Yq-QWg" secondAttribute="trailing" constant="2" id="bv3-hC-PDq"/>
+                            <constraint firstItem="Kw9-Iy-hIr" firstAttribute="top" secondItem="iQb-zV-uTP" secondAttribute="bottom" id="d8G-LL-NF0"/>
+                            <constraint firstItem="I9y-Yq-QWg" firstAttribute="leading" secondItem="LfT-AF-1MI" secondAttribute="leadingMargin" constant="4" id="f9n-Gy-yX2"/>
+                            <constraint firstItem="Kw9-Iy-hIr" firstAttribute="leading" secondItem="LfT-AF-1MI" secondAttribute="leading" id="jGD-t7-kZb"/>
+                            <constraint firstItem="C85-cO-yvg" firstAttribute="top" secondItem="Wkn-nK-Hva" secondAttribute="bottom" constant="17" id="qbk-vO-nbM"/>
+                            <constraint firstAttribute="trailing" secondItem="Kw9-Iy-hIr" secondAttribute="trailing" id="umN-Cm-jN5"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="fullImageView" destination="Kw9-Iy-hIr" id="m2o-6V-O0W"/>
-                        <outlet property="fullScrollView" destination="k2G-4w-DKI" id="Lp0-MI-nzk"/>
+                        <outlet property="myLabel" destination="I9y-Yq-QWg" id="ng9-iQ-G9l"/>
+                        <outlet property="photoURLLabel" destination="Wkn-nK-Hva" id="fBR-LA-nMQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pm3-lz-FuM" userLabel="First Responder" sceneMemberID="firstResponder"/>

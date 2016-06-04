@@ -10,16 +10,12 @@ import UIKit
 import SDWebImage
 
 class GalleryViewController: UIViewController {
-
-    var topPlaceID:String = ""
+        
+    var topPlaceID:String = "Empty"
     
     var photos = [Photo]()
     
-    var fullPhotos1 = UIImageView()
-    
-    //var indexPath1 = NSIndexPath()
-    
-    var aPhoto2 = Photo?()
+    var fullPhotos1 = UIImage?()
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -36,6 +32,9 @@ class GalleryViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        let top = topPlaceID
+        print(top)
+        
         apiClient.findAllPhotosOfTopPlace(topPlaceID) { (success:[Photo]?, failure) -> Void in
             if let photosToShow = success {
                 self.photos.removeAll()
@@ -44,13 +43,6 @@ class GalleryViewController: UIViewController {
                 self.collectionView.reloadData()
             }
         }
-    }
-
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }
 
@@ -86,54 +78,30 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
         return photos[index.row]
     }
     
+    
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    
-        //let aPhoto = photoAt(indexPath)
-        let index = indexPath
-        let indexRow = indexPath.row
-        
-        print("index: \(index)")
-        print("indexRow: \(indexRow)")
-        
-        aPhoto2 = photoAt(indexPath)
-        print(" aPhoto2: \(aPhoto2!)")
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCollectionViewCell
-        
-        fullPhotos1 = cell.imageView
         
         
+        //let iconURLText = photoAt(indexPath).iconURL
+        //let photoURLText = photoAt(indexPath).photoURL
         
-    }
-    
-    override  func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let FullPhotoVC: FullPhotoViewController = segue.destinationViewController as! FullPhotoViewController
-        let imageViewTemp = self.fullPhotos1
-        FullPhotoVC.imageFull2 = imageViewTemp
-        let imageTemp = self.fullPhotos1.image
-        FullPhotoVC.image2 = imageTemp
+        let vc = storyboard?.instantiateViewControllerWithIdentifier("FullStoryVC") as! FullPhotoViewController
+        //vc.textLabel = iconURLText
+        //vc.textLabelPhotoURL = photoURLText
+        vc.selectPhoto = photoAt(indexPath)
         
-        print("aPhoto2.iconURL: \(aPhoto2?.iconURL)")
-        print("aPhoto2.iconWidth: \(aPhoto2?.iconWidth)")
-        print("aPhoto2.name: \(aPhoto2?.name)")
-        print("aPhoto2.ownerID: \(aPhoto2?.ownerID)")
-        print("aPhoto2.photoURL: \(aPhoto2?.photoURL)")
-        print("aPhoto2.userID: \(aPhoto2?.userID)")
-        
-        
-        FullPhotoVC.fullPhotoGood = aPhoto2
-        //FullPhotoVC.fullImageView.image = imageTemp
-        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-
-//MARK: -UIImageView Extention
+//MARK: -UIImageView Extension
 extension UIImageView {
     private struct Constants {
         static let defaultIconWidth = 240
     }
     
+    //функция плавной подгрузки фото в imageView по известному iconURL
     func updateImageWith(photo:Photo?) {
         guard let photoToApply = photo else {
             self.image = nil
@@ -142,12 +110,18 @@ extension UIImageView {
         
         let width = photoToApply.iconWidth > 0 ? photoToApply.iconWidth : Constants.defaultIconWidth
         
-        let url = CGFloat(width) > frame.size.width ? photoToApply.iconURL : photoToApply.photoURL
+        var url = ""
+        
+        if photoToApply.photoURL != "" {//если photoURL не существует, то присвоим переменной url = iconURL
+            url = CGFloat(width) > frame.size.width ? photoToApply.iconURL : photoToApply.photoURL
+        }
+        else {
+            url = photoToApply.iconURL
+        }
         
         sd_setImageWithURL(NSURL(string: url),
                            placeholderImage: nil,
                            options: [.ProgressiveDownload])
-        
     }
 }
 

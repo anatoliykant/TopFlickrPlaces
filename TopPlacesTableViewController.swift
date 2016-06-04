@@ -16,10 +16,13 @@ class TopPlacesTableViewController: UITableViewController {
     
     var TableArray = [String]()
     var TableArrayContent = [String]()
+    var TableArrayTopID = [String]()
 
     var photosTop:[PhotoTopPlaces]?
     
-    static let apiURL = "https://api.flickr.com/services/rest/"
+    var topIDs = [TopPlaces]()
+    
+    let apiURL = "https://api.flickr.com/services/rest/"
     
     typealias PhotosCompletionTopPlaces = (success:[PhotoTopPlaces]?,failure:NSError?) -> Void
     
@@ -35,9 +38,6 @@ class TopPlacesTableViewController: UITableViewController {
         tableViewListTopPlaces.dataSource = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -55,11 +55,9 @@ class TopPlacesTableViewController: UITableViewController {
         
         var parsedPhotos = [PhotoTopPlaces]()
         
-        
         for info in place {
             parsedPhotos.append(PhotoTopPlaces(info: info))
-        }
-        
+        }        
         return parsedPhotos
     }
     
@@ -88,12 +86,11 @@ class TopPlacesTableViewController: UITableViewController {
         params = authorise(params)
         
         Alamofire.request(.GET,
-            TopPlacesTableViewController.apiURL,
+            self.apiURL,
             parameters: params,
             encoding: .URL,
             headers: nil)
             .responseJSON { response -> Void in
-                
                 
                 if let tempValue = response.result.value
                 {
@@ -101,19 +98,23 @@ class TopPlacesTableViewController: UITableViewController {
                     
                     var topPlaces = [String]()
                     var topPlacesContent = [String]()
+                    var topPlacesID = [String]()
                     //let onePlaceContent = json["places"]["place"][1]["_content"].string!
                     //print("JSON: \(onePlaceContent)")
                     
                     if let topArray = json["places"]["place"].array {
                         
-                        
                         for placeDict in 0..<topArray.count {
                             let topPlace: String! = json["places"]["place"][placeDict]["woe_name"].string!
                             let topPlaceContent: String! = json["places"]["place"][placeDict]["_content"].string!
-                            //print("Another topPlace: \(topPlace)")
+                            let topPlaceID: String! = json["places"]["place"][placeDict]["place_id"].string!
+//                            print("topPlace: \(topPlace)")
+//                            print("topPlaceContent: \(topPlaceContent)")
+//                            print("ID topPlace: \(topPlaceID)")
                             
                             topPlaces.append(topPlace!)
                             topPlacesContent.append(topPlaceContent!)
+                            topPlacesID.append(topPlaceID!)
                         }
                         
                         //print("topPlaces: \(topPlaces)")
@@ -123,6 +124,7 @@ class TopPlacesTableViewController: UITableViewController {
                             //print("jokesSit eName: \(jokesSiteName)")
                             self.TableArray = topPlaces               //.sort()
                             self.TableArrayContent = topPlacesContent //.sort()
+                            self.TableArrayTopID = topPlacesID
                             //print(self.TableArrayContent.count)
                             //print(self.TableArrayContent)
                             self.tableViewListTopPlaces.reloadData()
@@ -139,12 +141,22 @@ class TopPlacesTableViewController: UITableViewController {
     
     // заполняет ячейки элементами из массива TableArray
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell1 = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let Cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
-        cell1.textLabel?.text = TableArray[indexPath.row]
-        //var detailLabel = "\(TableArray[indexPath.row]) \(indexPath.row)"
-        cell1.detailTextLabel?.text = TableArrayContent[indexPath.row]
-        return cell1
+        Cell.textLabel?.text = TableArray[indexPath.row]
+        Cell.detailTextLabel?.text = TableArrayContent[indexPath.row]
+        return Cell
+    }
+    
+    
+//    private func topID(index:NSIndexPath) -> TopPlaces {
+//        return topIDs[index.row]
+//    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let vc = storyboard?.instantiateViewControllerWithIdentifier("GalleryVC") as! GalleryViewController
+        vc.topPlaceID = TableArrayTopID[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
