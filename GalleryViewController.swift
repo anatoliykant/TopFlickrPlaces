@@ -105,7 +105,7 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
         
         //let number = 123
         
-        NSUserDefaults.standardUserDefaults().setValue(recentClient.recentPhoto, forKey: "recSelectPhoto")
+        NSUserDefaults.standardUserDefaults().setObject(recentClient.recentPhoto, forKey: "arr")
         
         
 //        var recentPhotoTest = NSUserDefaults.standardUserDefaults().objectForKey("arrayPhoto") as? [Photo] ?? [Photo]()
