@@ -47,15 +47,14 @@ class APIClient: NSObject {
         guard let photos = info  ["photos"] as? [String : AnyObject],
             let photo = photos["photo"] as? [ [String : AnyObject] ]
             else {
-                return [Photo]()
-        }
+                  return [Photo]()
+                 }
         
         var parsedPhotos = [Photo]()
         
         for info in photo {
             parsedPhotos.append(Photo(info: info))
         }
-        
         return parsedPhotos
     }
 }

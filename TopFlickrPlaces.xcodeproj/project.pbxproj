@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A2378915AAF0471B4B12C579 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2716811E6B15EEFA0F96DEC /* Pods.framework */; };
-		E6786C6E1CDFD95A00691E8C /* FullImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6786C6D1CDFD95A00691E8C /* FullImageCollectionViewCell.swift */; };
+		E5FC573B1D04CA6F00AA8196 /* RecentlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC573A1D04CA6F00AA8196 /* RecentlyCollectionViewCell.swift */; };
+		E5FC573D1D04CCB200AA8196 /* FullRecentlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC573C1D04CCB200AA8196 /* FullRecentlyViewController.swift */; };
+		E67826021D05B84B00574E60 /* RecentPhotoArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67826011D05B84B00574E60 /* RecentPhotoArray.swift */; };
 		E6E6BD551CD6AF3800482616 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E6BD541CD6AF3800482616 /* GalleryViewController.swift */; };
 		E6E6BD571CD6B15200482616 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E6BD561CD6B15200482616 /* PhotoCollectionViewCell.swift */; };
 		E6E6BD591CD6BB3A00482616 /* FullPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E6BD581CD6BB3A00482616 /* FullPhotoViewController.swift */; };
 		F51B05FC1CC571AE00E582F8 /* APIClient_top.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51B05FB1CC571AE00E582F8 /* APIClient_top.swift */; };
-		F51B05FE1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51B05FD1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift */; };
 		F51B06001CC5741400E582F8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51B05FF1CC5741400E582F8 /* Photo.swift */; };
 		F55927921CCCE350005659B0 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F55927911CCCE350005659B0 /* SwiftyJSON.framework */; };
 		F561A16A1CC2230500991E85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F561A1691CC2230500991E85 /* AppDelegate.swift */; };
@@ -22,18 +23,20 @@
 		F561A1711CC2230500991E85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F561A1701CC2230500991E85 /* Assets.xcassets */; };
 		F561A1741CC2230500991E85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F561A1721CC2230500991E85 /* LaunchScreen.storyboard */; };
 		F561A1801CC226A200991E85 /* TopPlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F561A17F1CC226A200991E85 /* TopPlacesTableViewController.swift */; };
-		F561A1821CC226B000991E85 /* RecentlyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F561A1811CC226B000991E85 /* RecentlyTableViewController.swift */; };
+		F561A1821CC226B000991E85 /* RecentlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F561A1811CC226B000991E85 /* RecentlyViewController.swift */; };
 		F5C059911CCCB37E005C2C91 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F5C059901CCCB37E005C2C91 /* Podfile */; };
+		F5C8E62A1D03772F00315F1F /* TopPlaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C8E6291D03772F00315F1F /* TopPlaces.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E2716811E6B15EEFA0F96DEC /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6786C6D1CDFD95A00691E8C /* FullImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		E5FC573A1D04CA6F00AA8196 /* RecentlyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		E5FC573C1D04CCB200AA8196 /* FullRecentlyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullRecentlyViewController.swift; sourceTree = "<group>"; };
+		E67826011D05B84B00574E60 /* RecentPhotoArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentPhotoArray.swift; sourceTree = "<group>"; };
 		E6E6BD541CD6AF3800482616 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GalleryViewController.swift; path = ../GalleryViewController.swift; sourceTree = "<group>"; };
 		E6E6BD561CD6B15200482616 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		E6E6BD581CD6BB3A00482616 /* FullPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPhotoViewController.swift; sourceTree = "<group>"; };
 		F51B05FB1CC571AE00E582F8 /* APIClient_top.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient_top.swift; sourceTree = "<group>"; };
-		F51B05FD1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopPhotoPlacesViewController.swift; sourceTree = "<group>"; };
 		F51B05FF1CC5741400E582F8 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		F55927911CCCE350005659B0 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../Library/Developer/Xcode/DerivedData/TopFlickrPlaces-gsoqhftixerxtxadjbbzfslusypa/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		F561A1661CC2230400991E85 /* TopFlickrPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopFlickrPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,8 +47,9 @@
 		F561A1731CC2230500991E85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F561A1751CC2230500991E85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F561A17F1CC226A200991E85 /* TopPlacesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopPlacesTableViewController.swift; path = ../TopPlacesTableViewController.swift; sourceTree = "<group>"; };
-		F561A1811CC226B000991E85 /* RecentlyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentlyTableViewController.swift; path = ../RecentlyTableViewController.swift; sourceTree = "<group>"; };
+		F561A1811CC226B000991E85 /* RecentlyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentlyViewController.swift; path = ../RecentlyViewController.swift; sourceTree = "<group>"; };
 		F5C059901CCCB37E005C2C91 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		F5C8E6291D03772F00315F1F /* TopPlaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopPlaces.swift; sourceTree = "<group>"; };
 		F6CDA782945F8AD299474BBF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FCBCB5320F614C5611F20F8F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +85,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E5FC57391D04C5F200AA8196 /* Additional classes */ = {
+			isa = PBXGroup;
+			children = (
+				F51B05FB1CC571AE00E582F8 /* APIClient_top.swift */,
+				F51B05FF1CC5741400E582F8 /* Photo.swift */,
+				F5C8E6291D03772F00315F1F /* TopPlaces.swift */,
+				E6E6BD561CD6B15200482616 /* PhotoCollectionViewCell.swift */,
+				E5FC573A1D04CA6F00AA8196 /* RecentlyCollectionViewCell.swift */,
+				E67826011D05B84B00574E60 /* RecentPhotoArray.swift */,
+			);
+			name = "Additional classes";
+			sourceTree = "<group>";
+		};
+		E5FC573E1D04CCCA00AA8196 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E6E6BD581CD6BB3A00482616 /* FullPhotoViewController.swift */,
+				E5FC573C1D04CCB200AA8196 /* FullRecentlyViewController.swift */,
+				E6E6BD541CD6AF3800482616 /* GalleryViewController.swift */,
+				F561A1811CC226B000991E85 /* RecentlyViewController.swift */,
+				F561A17F1CC226A200991E85 /* TopPlacesTableViewController.swift */,
+				F561A16B1CC2230500991E85 /* ViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		F561A15D1CC2230400991E85 = {
 			isa = PBXGroup;
 			children = (
@@ -103,17 +133,9 @@
 		F561A1681CC2230500991E85 /* TopFlickrPlaces */ = {
 			isa = PBXGroup;
 			children = (
-				F51B05FB1CC571AE00E582F8 /* APIClient_top.swift */,
 				F561A1691CC2230500991E85 /* AppDelegate.swift */,
-				E6E6BD581CD6BB3A00482616 /* FullPhotoViewController.swift */,
-				E6E6BD541CD6AF3800482616 /* GalleryViewController.swift */,
-				E6E6BD561CD6B15200482616 /* PhotoCollectionViewCell.swift */,
-				E6786C6D1CDFD95A00691E8C /* FullImageCollectionViewCell.swift */,
-				F51B05FF1CC5741400E582F8 /* Photo.swift */,
-				F561A1811CC226B000991E85 /* RecentlyTableViewController.swift */,
-				F51B05FD1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift */,
-				F561A17F1CC226A200991E85 /* TopPlacesTableViewController.swift */,
-				F561A16B1CC2230500991E85 /* ViewController.swift */,
+				E5FC57391D04C5F200AA8196 /* Additional classes */,
+				E5FC573E1D04CCCA00AA8196 /* ViewControllers */,
 				F5F220791CD0E2F400AD8A7F /* storyboard */,
 				F561A1701CC2230500991E85 /* Assets.xcassets */,
 				F561A1751CC2230500991E85 /* Info.plist */,
@@ -254,17 +276,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5FC573B1D04CA6F00AA8196 /* RecentlyCollectionViewCell.swift in Sources */,
 				F51B06001CC5741400E582F8 /* Photo.swift in Sources */,
+				F5C8E62A1D03772F00315F1F /* TopPlaces.swift in Sources */,
 				F561A1801CC226A200991E85 /* TopPlacesTableViewController.swift in Sources */,
 				E6E6BD591CD6BB3A00482616 /* FullPhotoViewController.swift in Sources */,
+				E67826021D05B84B00574E60 /* RecentPhotoArray.swift in Sources */,
 				F51B05FC1CC571AE00E582F8 /* APIClient_top.swift in Sources */,
 				F561A16C1CC2230500991E85 /* ViewController.swift in Sources */,
-				E6786C6E1CDFD95A00691E8C /* FullImageCollectionViewCell.swift in Sources */,
-				F51B05FE1CC572AD00E582F8 /* TopPhotoPlacesViewController.swift in Sources */,
 				E6E6BD571CD6B15200482616 /* PhotoCollectionViewCell.swift in Sources */,
 				E6E6BD551CD6AF3800482616 /* GalleryViewController.swift in Sources */,
 				F561A16A1CC2230500991E85 /* AppDelegate.swift in Sources */,
-				F561A1821CC226B000991E85 /* RecentlyTableViewController.swift in Sources */,
+				E5FC573D1D04CCB200AA8196 /* FullRecentlyViewController.swift in Sources */,
+				F561A1821CC226B000991E85 /* RecentlyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

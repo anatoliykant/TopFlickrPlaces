@@ -11,8 +11,7 @@ import UIKit
 class FullPhotoViewController: UIViewController {//, GalleryViewControllerDelegate {
 
     @IBOutlet weak var fullImageView: UIImageView!
-    @IBOutlet weak var myLabel: UILabel! // удалить lable в сторибоард и в коде
-    @IBOutlet weak var photoURLLabel: UILabel! // ----//----//----
+    @IBOutlet weak var myLabel: UILabel!    
     
     
     //var textLabel = "Empty iconURL"
@@ -31,7 +30,17 @@ class FullPhotoViewController: UIViewController {//, GalleryViewControllerDelega
     
     func setupImage() {
         self.fullImageView.updateImageWith(selectPhoto)
-        //self.myLabel.text = textLabel                 //удалить
-        //self.photoURLLabel.text = textLabelPhotoURL   //удалить
+        
+        guard let aPhoto = selectPhoto else { return }
+        
+        if aPhoto.name != "" {
+            self.myLabel.text = aPhoto.name
+        }
+        else if aPhoto.photoDescription != "" {
+            self.myLabel.text = aPhoto.photoDescription
+        } else {
+            self.myLabel.text = "Неизвестно"
+        }
+        
     }
 }
