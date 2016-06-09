@@ -8,33 +8,41 @@
 
 import UIKit
 import SDWebImage
+import MBProgressHUD
 
 class GalleryViewController: UIViewController {
         
     var topPlaceID:String = "Empty"
     
     var photos = [Photo]()
-    //var recentPhoto = [Photo]()
-    
-    var fullPhotos1 = UIImage?()//Удалить?
+    var recentPhotos = [Photo]()
+    var hud = Loader()
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var apiClient = APIClient()
-    private var recentClient = RecentPhotoArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         assert(topPlaceID.characters.count > 0)
+        
+        //выводит сохраненные (ранее просмотренные) фото из NSUserDefault
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if let savedPeople = defaults.objectForKey("recPhoto") as? NSData {
+            recentPhotos = NSKeyedUnarchiver.unarchiveObjectWithData(savedPeople) as! [Photo]
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
                 
         apiClient.findAllPhotosOfTopPlace(topPlaceID) { (success:[Photo]?, failure) -> Void in
+           
             if let photosToShow = success {
+                
                 self.photos.removeAll()
                 self.photos.appendContentsOf(photosToShow)
                 self.collectionView.reloadData()
@@ -55,6 +63,8 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCollectionViewCell
         
+        self.hud.Show("Подгружаются фотографии...", delegate: self, time: 1)
+        
         cell.imageView.updateImageWith(aPhoto)
         
         if aPhoto.name != "" {
@@ -64,7 +74,9 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
             cell.textLabel.text = aPhoto.photoDescription
         } else {
             cell.textLabel.text = "Неизвестно"
-        }        
+        }
+        
+        self.hud.Hide(self)
         return cell
     }
         
@@ -74,56 +86,45 @@ extension GalleryViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        
-        //let iconURLText = photoAt(indexPath).iconURL
-        //let photoURLText = photoAt(indexPath).photoURL
+        let selectedPhoto = photoAt(indexPath)
         
         let vc = storyboard?.instantiateViewControllerWithIdentifier("FullStoryVC") as! FullPhotoViewController
-        //vc.textLabel = iconURLText
-        //vc.textLabelPhotoURL = photoURLText
-        let selectedPhoto = photoAt(indexPath)
         vc.selectPhoto = selectedPhoto
         
-        recentClient.recentPhoto.append(selectedPhoto)
-        
-        
-        
-        
-        let recentlyVC = storyboard?.instantiateViewControllerWithIdentifier("RecentlyVC") as! RecentlyViewController
-        
-        
-        
-        
-        
-        recentlyVC.selectPhoto3 = recentClient.recentPhoto
-        
-        //print("selectedPhoto: \(selectedPhoto)")
-        print("recentPhoto: \(recentClient.recentPhoto)")
-        print("recentlyVC.selectPhoto3 GalleryVC: \(recentlyVC.selectPhoto3)")
-        
-        //print("recentlyVC.selectPhoto1: \(recentlyVC.selectPhoto1)")
-        
-        //let number = 123
-        
-        NSUserDefaults.standardUserDefaults().setObject(recentClient.recentPhoto, forKey: "arr")
-        
-        
-//        var recentPhotoTest = NSUserDefaults.standardUserDefaults().objectForKey("arrayPhoto") as? [Photo] ?? [Photo]()
-//        recentPhotoTest.append(selectedPhoto)
-//        
-//        
-//        NSUserDefaults.standardUserDefaults().setObject(recentPhotoTest, forKey: "arrayPhoto")
-//        NSUserDefaults.standardUserDefaults().synchronize()
-//        
-//        let PhotoTest = NSUserDefaults.standardUserDefaults().valueForKey("recSelectPhoto") as! NSInteger
-//        
-//        print("PhotoTest: \(PhotoTest)")
-//        
-//        let PhotoTest2 = NSUserDefaults.standardUserDefaults().arrayForKey("arrayPhoto")
-//        
-//        print("PhotoTest2: \(PhotoTest2)")
+        addRecPhoto(100, addElement: selectedPhoto)
         
         self.navigationController?.pushViewController(vc, animated: true)
+    }    
+    
+    //функция записи просмотренных данных в NSUserDefault
+    func save() {
+        let savedData = NSKeyedArchiver.archivedDataWithRootObject(recentPhotos)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(savedData, forKey: "recPhoto")
+        //defaults.removeObjectForKey("recPhoto")//обнуление данных по ключу
+    }
+    
+    //функцию для ограничения размера массива до заданного количества count элементов (просмотренных фотографий) -  в результате ее работы самый старый элемент массива (фото) удаляется,
+    //а также для проверки массива на дубликаты фотографий
+    func addRecPhoto(count: Int, addElement: Photo) {
+        
+        var repeate = false
+        
+        if recentPhotos.count == count {
+            recentPhotos.removeLast()
+        }
+        
+        for ind in recentPhotos {
+            if ind.iconURL == addElement.iconURL
+            {
+                repeate = true
+            }
+        }
+        
+        if repeate == false {
+            recentPhotos.insert(addElement, atIndex: 0)
+            save()
+        }
     }
 }
 

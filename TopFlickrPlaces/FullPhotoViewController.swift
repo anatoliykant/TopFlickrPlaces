@@ -12,23 +12,26 @@ class FullPhotoViewController: UIViewController {//, GalleryViewControllerDelega
 
     @IBOutlet weak var fullImageView: UIImageView!
     @IBOutlet weak var myLabel: UILabel!    
-    
-    
-    //var textLabel = "Empty iconURL"
-    //var textLabelPhotoURL = "Empty photoURL"
+        
     var selectPhoto = Photo?()
+    var hud = Loader()
     
     override func viewDidLoad() {
+        //showIsBusy(true, animated: true)
         super.viewDidLoad()
+        //showIsBusy(false, animated: true)
     }
     
     override func viewDidAppear(animated: Bool) {
-        
+        //showIsBusy(true, animated: true)
         setupImage()
         fullImageView.reloadInputViews()
+        //showIsBusy(false, animated: true)
     }
     
     func setupImage() {
+        //showIsBusy(true, animated: true)
+        self.hud.Show("Загрузка...", delegate: self, time: 1.5)
         self.fullImageView.updateImageWith(selectPhoto)
         
         guard let aPhoto = selectPhoto else { return }
@@ -41,6 +44,7 @@ class FullPhotoViewController: UIViewController {//, GalleryViewControllerDelega
         } else {
             self.myLabel.text = "Неизвестно"
         }
-        
+        self.hud.Hide(self)
+        //showIsBusy(false, animated: true)
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CE8AA9BE3B33933858D2D5982F1AE095"
-               BuildableName = "SDWebImage.framework"
-               BlueprintName = "SDWebImage"
+               BlueprintIdentifier = "73E69E79EABC21FE18CE3EE04E1090D4"
+               BuildableName = "Pods_TopFlickrPlaces.framework"
+               BlueprintName = "Pods-TopFlickrPlaces"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE8AA9BE3B33933858D2D5982F1AE095"
-            BuildableName = "SDWebImage.framework"
-            BlueprintName = "SDWebImage"
+            BlueprintIdentifier = "73E69E79EABC21FE18CE3EE04E1090D4"
+            BuildableName = "Pods_TopFlickrPlaces.framework"
+            BlueprintName = "Pods-TopFlickrPlaces"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE8AA9BE3B33933858D2D5982F1AE095"
-            BuildableName = "SDWebImage.framework"
-            BlueprintName = "SDWebImage"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

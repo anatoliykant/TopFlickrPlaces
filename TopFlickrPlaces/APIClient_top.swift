@@ -25,12 +25,14 @@ class APIClient: NSObject {
         params = topPlaces.authorise(params)
         params["extras"] = "url_l, url_s, geo, date_taken, owner_name, description"
         
+        
         Alamofire.request(.GET,
             APIClient.apiURL,
             parameters: params,
             encoding: .URL,
             headers: nil)
-            .responseJSON { response -> Void in
+            .responseJSON { response -> Void in 
+                
                 
                 if response.result.error != nil {
                     completion(success: nil, failure: response.result.error)
@@ -56,5 +58,5 @@ class APIClient: NSObject {
             parsedPhotos.append(Photo(info: info))
         }
         return parsedPhotos
-    }
+    }    
 }

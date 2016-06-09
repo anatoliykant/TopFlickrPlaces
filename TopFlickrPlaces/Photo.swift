@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Photo: NSObject  {
+class Photo: NSObject, NSCoding  {
     var name:String?
     var photoURL = ""
     var iconURL = ""
@@ -47,9 +47,8 @@ class Photo: NSObject  {
             photoDescription = descriptionContent
         }
         
-        if photoDescription.isEmpty {
-            //print("not found description")
-        }
+//        if photoDescription.isEmpty {            
+//        }
         
         if let iconWidthValue = info["width_s"] as? Int {
             iconWidth = iconWidthValue
@@ -57,9 +56,33 @@ class Photo: NSObject  {
         
         super.init()
     }
+    
+    required init(coder aDecoder: NSCoder) {
+        name = aDecoder.decodeObjectForKey("name") as? String
+        photoURL = aDecoder.decodeObjectForKey("photoURL") as! String
+        iconURL = aDecoder.decodeObjectForKey("iconURL") as! String
+        iconWidth = aDecoder.decodeObjectForKey("iconWidth") as! Int
+        photoDescription = aDecoder.decodeObjectForKey("photoDescription") as! String
+        ownerID = aDecoder.decodeObjectForKey("ownerID") as! String
+        userID = aDecoder.decodeObjectForKey("userID") as! String
+        //title = aDecoder.decodeObjectForKey("title") as? String
+        
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(name, forKey: "name")
+        aCoder.encodeObject(photoURL, forKey: "photoURL")
+        aCoder.encodeObject(iconURL, forKey: "iconURL")
+        aCoder.encodeObject(iconWidth, forKey: "iconWidth")
+        aCoder.encodeObject(photoDescription, forKey: "photoDescription")
+        aCoder.encodeObject(ownerID, forKey: "ownerID")
+        aCoder.encodeObject(userID, forKey: "userID")
+        //aCoder.encodeObject(title, forKey: "title")
+    }
+
 }
 
-
+//разобраться с этим классом, нужен ли он вообще?
 class PhotoTopPlaces: NSObject  {
     
     var name:String?
